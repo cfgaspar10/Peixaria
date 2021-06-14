@@ -1,0 +1,28 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:carousel value="#{productController.listProduct}" headerText="Responsive"
+			var="entity" itemStyle="text-align:center" responsive="true">
+			<p:panelGrid columns="2" style="width:100%;margin:10px 0px;"
+				columnClasses="label,value" layout="grid"
+				styleClass="ui-panelgrid-blank">
+				<f:facet name="header">
+					<p:graphicImage name="demo/meat/#{entity.brand}.gif" />
+				</f:facet>
+
+				<h:outputText value="#{entity.name}" />
+
+			</p:panelGrid>
+
+			<f:facet name="footer">
+                In total there are #{productController.listProduct.size()} cars.
+        </f:facet>
+		</p:carousel>
+
+	</ui:define>
+</ui:composition>

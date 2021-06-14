@@ -1,0 +1,142 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="head">
+		<style type="text/css">
+input {
+	border-color: #F12742;
+}
+</style>
+	</ui:define>
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:growl id="growl" globalOnly="false" />
+			<p:panel id="panel">
+				<f:facet name="header">
+					<div align="center" style="width: 85%; display: inline-block;">
+						<h1>Cadastro de Produto</h1>
+					</div>
+					<div align="right" style="float: right; position: relative;">
+						<img class="img-responsive"
+							style="max-width: 80px !important; max-height: 80px !important;"
+							src="/Peixaria/faces/img-product?name=#{productController.entity.id}.png" />
+					</div>
+				</f:facet>
+				<p:messages />
+				<div class="ui-fluid p-formgrid p-grid">
+					<div class="p-field p-col-12 p-md-6">
+						<p:commandLink value="Corte: "
+							actionListener="#{meatController.openMeatListener}"
+							process="@this" update="@none">
+							<p:ajax event="dialogReturn"
+								listener="#{meatController.getMeatListener}" update="@form" />
+						</p:commandLink>
+						<p:inputText id="itCut" value="#{meatController.entity.cut}"
+							required="true" requiredMessage="Informe o tipo de corte." />
+					</div>
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Peixe: " style="margin-bottom: 0;">
+							<p:message for="itAnimal" escape="false" />
+						</p:outputLabel>
+						<p:inputText id="itAnimal" value="#{meatController.entity.animal}" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Tipo: " style="margin-bottom: 0;" />
+						<p:selectOneMenu id="slbType"
+							value="#{meatController.entity.meatType}" size="1">
+							<f:selectItem itemLabel="Selecione ..." itemValue=""
+								noSelectionOption="true" />
+							<f:selectItems value="#{meatController.listMeatType}" var="type"
+								itemLabel="#{type.label}" itemValue="#{meatType}" />
+						</p:selectOneMenu>
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Categoria: " style="margin-bottom: 0;" />
+						<p:spinner min="1" max="3" rotate="true"
+							value="#{meatController.entity.category}" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Valor do Kg: " style="margin-bottom: 0;" />
+						<p:spinner min="0" prefix="R$ " stepFactor="0.25"
+							value="#{meatController.entity.value}" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Lote: " style="margin-bottom: 0;" />
+						<p:inputText id="itLot" value="#{meatController.entity.lot}" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Quantidade disponível: "
+							style="margin-bottom: 0;" />
+						<p:spinner min="0" prefix="KG " stepFactor="0.25"
+							value="#{meatController.entity.availableQuantity}" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Data de Validade: "
+							style="margin-bottom: 0;" />
+						<p:calendar value="#{meatController.entity.shelfLife}"
+							pattern="dd/MM/yyyy" mask="99/99/9999" locale="pt_BR" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-12">
+						<h:form enctype="multipart/form-data">
+							<p:fileUpload listener="#{productController.upload}"
+								label="#{productController.pictureName}" mode="advanced"
+								update="@this messages" auto="false" sizeLimit="200000"
+								allowTypes="/(\.|\/)(gif|jpe?g|png)$/" />
+							<p:growl id="messages" showDetail="true" />
+						</h:form>
+					</div>
+
+					<div class="p-field p-col-12 p-md-12">
+						<p:outputLabel value="Descrição: " style="margin-bottom: 0;">
+							<p:message for="itDescription" escape="false" />
+						</p:outputLabel>
+						<p:inputTextarea id="itDescription" counter="display"
+							maxlength="150" counterTemplate="{0} caracteres restantes."
+							autoResize="true" value="#{meatController.entity.description}" />
+						<h:outputText id="display" />
+					</div>
+				</div>
+
+				<p:toolbar style="background-color: transparent; border: 0;">
+					<f:facet name="left">
+						<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
+							update="@form" action="#{meatController.save}" />
+
+						<p:commandButton value="Limpar" process="@this" update="panel"
+							action="#{meatController.clear}">
+							<p:ajax update="@form" resetValues="true" />
+						</p:commandButton>
+
+					</f:facet>
+
+					<f:facet name="right">
+						<p:commandButton value="Excluir" icon="pi pi-trash"
+							process="@form" update="@form" action="#{meatController.delete}">
+							<p:confirm header="Confirmação" message="Confirma a exclusão?" />
+						</p:commandButton>
+					</f:facet>
+				</p:toolbar>
+			</p:panel>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

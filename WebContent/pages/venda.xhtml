@@ -1,0 +1,126 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false">
+			<p:graphicImage name="/images/loading.gif" />
+		</p:dialog>
+
+		<h:form id="form">
+			<p:growl id="growl" globalOnly="false" />
+			<p:panel id="panel">
+				<f:facet name="header">
+					<div align="center">
+						<h1>Gerenciamento de Venda</h1>
+					</div>
+				</f:facet>
+				<div class="ui-fluid p-formgrid p-grid">
+
+					<div class="p-field p-col-12 p-md-12">
+						<p:commandLink value="Visualizar vendas"
+							actionListener="#{saleController.openSaleListener}"
+							process="@this" update="@none">
+							<p:ajax event="dialogReturn"
+								listener="#{saleController.getSaleListener}" update="@form" />
+						</p:commandLink>
+					</div>
+
+					<div class="p-field p-col-12 p-md-12">
+						<p:commandLink value="Comprador: "
+							actionListener="#{clientController.openClientListener}"
+							process="@this" update="@none">
+							<p:ajax event="dialogReturn"
+								listener="#{saleController.getClientListener}" update="@form" />
+						</p:commandLink>
+						<p:inputText id="itBuyer"
+							value="#{saleController.entity.cart.user.email}" readonly="true"
+							requiredMessage="Informe o comprador." />
+					</div>
+
+					<div class="p-field p-col-12 p-md-12">
+						<h:outputLabel value="Carrinho de compras: ">
+							<p:message for="dtListItem" escape="false" />
+							<p:commandLink value="Buscar Produtos"
+								actionListener="#{productController.openProductListener}"
+								process="@this" update="@none">
+								<p:ajax event="dialogReturn"
+									listener="#{saleController.getProductListener}" update="@form" />
+							</p:commandLink>
+						</h:outputLabel>
+						<p:dataTable id="dtListItem" var="entity"
+							value="#{saleController.entity.cart.items}">
+							<p:column headerText="Produto">
+								<h:outputLabel value="#{entity.product.name}" />
+							</p:column>
+							<p:column headerText="Valor">
+								<h:outputLabel value="R$ #{entity.product.value}" />
+							</p:column>
+							<p:column headerText="Quantidade">
+								<p:spinner min="0" prefix="Kg " stepFactor="0.25"
+									value="#{entity.quantity}">
+									<p:ajax listener="#{saleController.entity.cart.getTotal()}"
+										update="@form" />
+								</p:spinner>
+							</p:column>
+							<p:column headerText="Ação">
+								<p:commandButton icon="pi pi-trash" process="@form"
+									update="@form"
+									actionListener="#{saleController.removePurchase(entity)}"
+									action="#{saleController.entity.cart.getTotal()}">
+								</p:commandButton>
+							</p:column>
+						</p:dataTable>
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<h:outputLabel value="Data de Venda: " />
+						<p:calendar value="#{saleController.entity.saleDate}"
+							pattern="dd/MM/yyyy" mask="99/99/9999" locale="pt_BR" />
+					</div>
+
+					<div class="p-field p-col-12 p-md-6">
+						<p:outputLabel value="Valor Total: " />
+						<p:inputText readonly="true"
+							value="R$ #{saleController.entity.cart.total}" />
+					</div>
+				</div>
+
+				<p:toolbar style="background-color: transparent; border: 0;">
+					<f:facet name="left">
+						<p:commandButton value="Salvar" icon="pi pi-check" process="@form"
+							update="@form" action="#{saleController.save}" />
+
+						<p:commandButton value="Limpar" process="@this" update="panel"
+							action="#{saleController.clear}">
+							<p:ajax update="@form" resetValues="true" />
+						</p:commandButton>
+
+					</f:facet>
+
+					<f:facet name="right">
+						<p:commandButton value="Excluir" icon="pi pi-trash"
+							process="@form" update="@form" action="#{saleController.delete}">
+							<p:confirm header="Confirmação" message="Confirma a exclusão?" />
+						</p:commandButton>
+					</f:facet>
+				</p:toolbar>
+			</p:panel>
+
+			<p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+				<p:commandButton value="Sim" type="button"
+					styleClass="ui-confirmdialog-yes" />
+				<p:commandButton value="Não" type="button"
+					styleClass="ui-confirmdialog-no" />
+			</p:confirmDialog>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

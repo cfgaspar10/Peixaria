@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="pt-br" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui">
+
+<h:head>
+	<title>Consulta de Carrinho</title>
+</h:head>
+
+<h:body>
+
+	<div class="layout-content">
+		<p:ajaxStatus onstart="PF('statusDialog').show()"
+			onsuccess="PF('statusDialog').hide()" />
+
+		<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+			closable="false" resizable="false" showHeader="false"
+			position="center center">
+			<p:graphicImage name="layout/images/loading.gif" />
+		</p:dialog>
+		<ui:insert name="content" />
+	</div>
+
+	<h:form>
+		<p:growl id="growl" globalOnly="false" />
+		<p:panel id="panel">
+			<f:facet name="header">
+				<div align="center">
+					<div class="ui-g ui-fluid">
+						<div class="ui-g-12">
+							<div class="card card-w-title">
+								<div class="ui-inputgroup">
+									<p:inputText id="itSearch" value="#{cartListener.search}"
+										placeholder="Informe o nome do cliente ..." />
+									<p:commandButton value="Pesquisar"
+										actionListener="#{cartListener.search}"
+										process="@this itSearch" update="dtList" />
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</f:facet>
+
+			<div class="ui-g ui-fluid">
+				<div class="ui-g-12">
+
+					<div class="card card-w-title">
+
+						<p:dataTable id="dtList" var="entity" rowIndexVar="row"
+							paginator="false" reflow="true" value="#{cartListener.list}">
+							<p:column headerText="Comprador">
+								<p:commandLink value="#{entity.client.name}"
+									action="#{cartListener.select(entity.id)}" process="@this"
+									update="@form" resetValues="true" />
+							</p:column>
+
+							<p:column headerText="Vendedor">
+								<h:outputText value="#{entity.sale.salesman.name}" />
+							</p:column>
+							
+							<p:column headerText="Quantidade de Itens">
+								<h:outputText value="#{entity.items.size()}" />
+							</p:column>
+
+							<p:column headerText="Valor">
+								<h:outputLabel value="#{entity.getTotal()}" />
+							</p:column>
+
+							<f:facet name="footer">
+							        Total de #{cartListener.list.size()} produtos vendidos.
+							    </f:facet>
+						</p:dataTable>
+					</div>
+				</div>
+			</div>
+		</p:panel>
+
+	</h:form>
+</h:body>
+</html>

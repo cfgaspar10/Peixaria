@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:p="http://primefaces.org/ui" lang="pt_br">
+
+<h:head>
+	<f:facet name="first">
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" />
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+	</f:facet>
+
+	<title>Login</title>
+	<link rel="icon" type="image/png"
+		href="/Acougue_TopicosII/resources/layout/images/icon.png" />
+</h:head>
+
+<h:body>
+
+	<p:ajaxStatus onstart="PF('statusDialog').show()"
+		onsuccess="PF('statusDialog').hide()" />
+
+	<p:dialog widgetVar="statusDialog" modal="true" draggable="false"
+		closable="false" resizable="false" showHeader="false">
+		<p:graphicImage name="layout/images/loading.gif" />
+	</p:dialog>
+
+	<h:form>
+		<p:growl id="growl" globalOnly="false" />
+		<div class="layout-login">
+			<div class="login-content">
+				<div class="login-icon" >
+					<div class="image" title="Toro Loko"/>
+				</div>
+				<div class="login-input">
+					<div>
+						<h:outputLabel value="Email" />
+						<p:inputText type="email" value="#{loginController.email}" />
+					</div>
+					<div>
+						<h:outputLabel value="Senha" />
+						<p:password value="#{loginController.password}" />
+					</div>
+					<div>
+						<p:commandLink update="@form"
+							action="#{loginController.forgotPassword}">
+							<h:outputText value="Esqueci a senha." />
+						</p:commandLink>
+					</div>
+				</div>
+
+				<div>
+					<p:commandButton icon="pi pi-sign-in" value="Acessar"
+						action="#{loginController.login}" process="@form" update="@form" />
+				</div>
+			</div>
+
+		</div>
+
+	</h:form>
+
+	<h:outputStylesheet name="layout/style/style-login.css" />
+	<h:outputStylesheet name="primeicons/primeicons.css"
+		library="primefaces" />
+
+</h:body>
+</html>
