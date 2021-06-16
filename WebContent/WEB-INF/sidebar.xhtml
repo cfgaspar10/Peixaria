@@ -21,6 +21,8 @@
 						onclick="redirectTo('/login.xhtml')">login</a> ou <a
 						onclick="maintenance()">cadastre-se</a>!</h:outputLabel> <h:outputLabel
 					rendered="#{templateController.logUser != null}">Bem vindo, #{templateController.logUser.email}. 
+					<a onclick="redirectTo('/login.xhtml')">(Sair)</a>
+					
 					
 				</h:outputLabel></span>
 
@@ -28,7 +30,7 @@
 				<li><a href="#" style="border-top: 0;">Alterar foto</a></li>
 				<li><a href="#">Alterar senha</a></li>
 				<li><a href="#">Atualizar perfil</a></li>
-				<li><a href="#">Notificações</a></li>
+			
 			</ul>
 		</div>
 
@@ -60,8 +62,8 @@
 				<li><span class="opener">Relatórios <i
 					class="pi pi-chevron-down" /></span>
 				<ul>
-					<li><a href="#">Relatórios Clientes</a></li>
-				
+				<li><a onclick="redirectTo('/relatorioclientes')">Clientes</a></li>
+					<li><a onclick="redirectTo('/relatoriocidades')">Cidades</a></li>
 				</ul></li>
 		</ul>
 

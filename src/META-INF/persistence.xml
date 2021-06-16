@@ -13,14 +13,11 @@
 		<class>model.Country</class>
 		<class>model.DefaultEntity</class>
 		<class>model.Employee</class>
-		<class>model.Funcionario</class>
 		<class>model.Item</class>
 		<class>model.LegalClient</class>
 		<class>model.LegalPerson</class>
 		<class>model.Meat</class>
 		<class>model.Person</class>
-		<class>model.Persona</class>
-		<class>model.PessoaFisica</class>
 		<class>model.Phone</class>
 		<class>model.PhysicalClient</class>
 		<class>model.PhysicalPerson</class>
@@ -28,10 +25,10 @@
 		<class>model.Provider</class>
 		<class>model.Sale</class>
 		<class>model.State</class>
-		<class>model.User</class>
+		<class>model.User</class>	
 		<properties>
 
-			<property name="javax.persistence.jdbc.driver"
+			<property name="javax.persistence.jdbc.driver" 
 				value="org.postgresql.Driver" />
 			<property name="javax.persistence.jdbc.url"
 				value="jdbc:postgresql://localhost:5432/peixaria" />

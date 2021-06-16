@@ -26,15 +26,18 @@ public enum Profile {
 			access.add("pages/venda_lista.xhtml");
 
 		} else if (value == 3) {
-			access.add("pages/produto_carne.xhtml");
+			access.add("pages/produto_peixe.xhtml");
 			access.add("pages/fornecedor.xhtml");
-			access.add("pages/cidade.xhtml");
-			access.add("pages/pais.xhtml");
-			access.add("pages/carrinho_lista.xhtml");
-			access.add("pages/cidade_lista.xhtml");
 			access.add("pages/estado_lista.xhtml");
 			access.add("pages/fornecedor_lista.xhtml");
+			access.add("pages/cidade.xhtml");
+			access.add("pages/cidade_lista.xhtml");
+			access.add("pages/pais.xhtml");
 			access.add("pages/pais_lista.xhtml");
+			access.add("pages/venda.xhtml");
+			access.add("pages/venda_lista.xhtml");
+			access.add("pages/carrinho_lista.xhtml");
+					
 		} else {
 			access.add("pages/funcionario_lista.xhtml");
 			access.add("pages/funcionario.xhtml");

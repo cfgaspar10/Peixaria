@@ -45,7 +45,6 @@ public class EmployeeController extends Controller<Person> {
 	}
 
 	private void createNewUser() {
-		// TODO ideia é encaminhar senha criada para email 
 		getEntity().getUser().setPassword(RandomPassword.generatePassword(8));
 		getEntity().getUser().setProfile(Profile.FUNCIONARIO);
 	}

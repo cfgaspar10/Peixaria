@@ -1,0 +1,76 @@
+<ui:composition xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://java.sun.com/jsf/html"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:p="http://primefaces.org/ui" template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+
+		<h:form>
+			<p:growl id="growl" globalOnly="false" />
+			<p:panel id="panel">
+				<f:facet name="header">
+					<div align="center">
+						<h1>Relatório de Clientes</h1>
+					</div>
+				</f:facet>
+				<div class="ui-g ui-fluid">
+					<div class="ui-g-12">
+						<div class="card card-w-title">
+							<p:panelGrid columns="1"
+								styleClass="form-group ui-panelgrid-blank" layout="grid">
+								
+								<p:outputLabel id="labelNome" value="Filtro por Nome:" />
+								<p:inputText value="#{relatorioClienteController.filtro}"/>
+								
+							</p:panelGrid>
+
+							
+						</div>
+					</div>
+				</div>
+				<p:toolbar>
+					<f:facet name="left">
+						<p:commandButton value="Buscar Pacientes" icon="pi pi-check" process="@form"
+							update="@form" actionListener="#{relatorioClienteController.pesquisar}" />
+
+						<p:commandButton value="Limpar" 
+							process="@this" update="@form"
+							actionListener="#{relatorioClienteController.limpar()}">
+							<p:ajax update="@form" resetValues="true" />
+						</p:commandButton>
+
+					</f:facet>
+					<f:facet name="right">
+						<p:commandButton value="Gerar Relatório" ajax="false"
+							disabled="#{relatorioClienteController.listClient.isEmpty()}"
+							actionListener="#{relatorioClienteController.gerarRelatorio}" 
+							onclick="this.form.target='_blank'">
+						</p:commandButton>
+
+					</f:facet>
+				</p:toolbar>				
+			</p:panel>
+
+		    <p:dataTable id="dtListagem" var="entity" value="#{relatorioClienteController.listClient}">
+			  				<p:column headerText="Nome">
+								<p:commandLink value="#{entity.name}" />
+							</p:column>
+
+							<p:column headerText="Email">
+								<h:outputText value="#{entity.user.email}" />
+							</p:column>
+
+							<p:column headerText="Data de Nascimento">
+								<h:outputLabel value="#{entity.birthDate}" />
+							</p:column>
+
+							<p:column headerText="Tipo">
+								<h:outputLabel value="#{entity.type}" />
+							</p:column>
+			 
+			</p:dataTable>
+
+		</h:form>
+	</ui:define>
+</ui:composition>

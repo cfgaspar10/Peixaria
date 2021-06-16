@@ -1,6 +1,5 @@
-package filter;
 //package filter;
-//
+////
 //import java.io.IOException;
 //
 //import javax.servlet.Filter;
@@ -53,7 +52,7 @@ package filter;
 //			user = (User) session.getAttribute("logUser");
 //		
 //		if (user == null) {
-//			((HttpServletResponse) response).sendRedirect("/Acougue_TopicosII/faces/login.xhtml");
+//			((HttpServletResponse) response).sendRedirect("/Peixaria/faces/login.xhtml");
 //		}  else {
 //			// nesse local podemos trabalhar as permissoes por pagina
 //			if (user.getProfile().getAccess().contains(address)) {
@@ -65,7 +64,7 @@ package filter;
 //					System.out.println(pages);
 //				}
 //				// seria melhor redirecionar para uma pagina dizendo que nao tem permissao
-//				((HttpServletResponse) response).sendRedirect("/Acougue_TopicosII/faces/acessonegado.xhtml");
+//				((HttpServletResponse) response).sendRedirect("/Peixaria/faces/acessonegado.xhtml");
 //			}
 //
 //		}

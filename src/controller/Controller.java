@@ -17,6 +17,12 @@ public abstract class Controller<T extends DefaultEntity<? super T>> implements 
 	private static final long serialVersionUID = 3135991960979657083L;
 
 	protected T entity;
+	
+	public abstract T getEntity();
+
+	public void setEntity(T entity) {
+		this.entity = entity;
+	}
 
 	public Controller() {
 		super();
@@ -28,6 +34,7 @@ public abstract class Controller<T extends DefaultEntity<? super T>> implements 
 			Util.addMessageInfo("Cadastro realizado com sucesso.");
 		}
 	}
+	
 	
 	protected boolean safeSave() {
 		Repository<T> r = new Repository<T>();
@@ -81,10 +88,5 @@ public abstract class Controller<T extends DefaultEntity<? super T>> implements 
 		setEntity(null);
 	}
 
-	public abstract T getEntity();
-
-	public void setEntity(T entity) {
-		this.entity = entity;
-	}
-
+	
 }

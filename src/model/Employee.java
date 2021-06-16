@@ -9,7 +9,8 @@ import model.validator.Validator;
 @Entity
 public class Employee extends PhysicalPerson {
 
-	private static final long serialVersionUID = 4721400599346259192L;
+
+	private static final long serialVersionUID = 5620689547742431291L;
 
 	@Column
 	private String registry;

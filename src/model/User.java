@@ -5,6 +5,11 @@ import javax.persistence.Entity;
 
 import model.validator.UserValidator;
 import model.validator.Validator;
+import javax.persistence.CascadeType;
+import javax.persistence.OneToOne;
+import javax.persistence.JoinColumn;
+
+
 
 @Entity(name = "UserSystem")
 public class User extends DefaultEntity<User>{
@@ -19,6 +24,8 @@ public class User extends DefaultEntity<User>{
 	
 	@Column(nullable = false)
 	private Profile profile;
+	
+
 	
 	public User() {
 		super();

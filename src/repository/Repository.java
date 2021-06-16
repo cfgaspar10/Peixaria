@@ -69,6 +69,8 @@ public class Repository<T extends DefaultEntity<? super T>> {
 			throw new RepositoryException("Erro ao salvar.");
 		} 
 	}
+	
+	
 
 	public void delete(T entity) throws RepositoryException {
 		try {
@@ -78,6 +80,38 @@ public class Repository<T extends DefaultEntity<? super T>> {
 			System.out.println("Erro ao relizar merge.");
 			e.printStackTrace();
 			throw new RepositoryException("Erro ao salvar uma transação.");
+		}
+	}
+	
+	public T salvar(T entity) throws RepositoryException, ValidateException, VersionException {
+		try {
+			if (entity.getValidator() != null)
+				entity.getValidator().validate(entity);
+
+			return getEntityManager().merge(entity);
+		} catch (ValidateException e) {
+//			e.printStackTrace();
+			System.out.println(e.getMessage());
+			throw e;
+
+		} catch (OptimisticLockException e) {
+			e.printStackTrace();
+			throw new VersionException("Versão antiga. Erro de controle de concorrência.");
+		} catch (Exception e) {
+			System.out.println("Erro no repositorio " + "ao executar o método merge.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao salvar.");
+		}
+	}
+
+	public void excluir(T entity) throws RepositoryException {
+		try {
+			T obj = getEntityManager().merge(entity);
+			getEntityManager().remove(obj);
+		} catch (Exception e) {
+			System.out.println("Erro no repositorio " + "ao executar o método merge.");
+			e.printStackTrace();
+			throw new RepositoryException("Erro ao salvar.");
 		}
 	}
 	

@@ -76,5 +76,7 @@ public abstract class ReportServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doGet(request, response);
 	}
+
+	
 	
 }

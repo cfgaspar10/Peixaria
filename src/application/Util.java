@@ -106,6 +106,12 @@ public class Util {
 	public static String encrypt(String value) {
 		return DigestUtils.sha256Hex(value);
 	}
+	
+	public static String hashSHA256(String valor) {
+		return DigestUtils.sha256Hex(valor);
+	}
+	
+	
 
 	public static void addMessageInfo(String message) {
 		FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, message, null));
