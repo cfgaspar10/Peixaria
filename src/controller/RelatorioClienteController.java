@@ -21,14 +21,9 @@ public class RelatorioClienteController implements Serializable {
 	private String filtro;
 	private List<Client> listClient;
 	
-	public void pesquisar() {
+	public void pesquisar() throws RepositoryException {
 		ClientRepository repo = new ClientRepository();
-		try {
-			setListClient(repo.findByName(filtro));
-		} catch (RepositoryException e) {
-			setListClient(null);
-			e.printStackTrace();
-		}
+		setListClient(repo.findByName(filtro));
 	}
 	
 	public void limpar() {

@@ -23,6 +23,7 @@
 		<class>model.PhysicalPerson</class>
 		<class>model.Product</class>
 		<class>model.Provider</class>
+		<class>model.RecuperarSenha</class>
 		<class>model.Sale</class>
 		<class>model.State</class>
 		<class>model.User</class>	

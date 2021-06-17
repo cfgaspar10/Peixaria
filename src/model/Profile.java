@@ -16,8 +16,9 @@ public enum Profile {
 		this.label = label;
 
 		access = new ArrayList<String>();
-		if (value == 1) {
-			access.add("http://localhost:8080/Peixaria/faces/pages/produto_lista.xhtml");
+		if (value == 0) {
+			access.add("pages/produto_peixe.xhtml");
+			access.add("pages/listener/produto_lista.xhtml");
 		} else if (value == 2) {
 			access.add("pages/cliente_fisico.xhtml");
 			access.add("pages/listener/cliente_lista.xhtml");

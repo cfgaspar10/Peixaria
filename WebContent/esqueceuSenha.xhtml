@@ -1,0 +1,29 @@
+<ui:composition lang="en" xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:h="http://xmlns.jcp.org/jsf/html"
+	xmlns:f="http://xmlns.jcp.org/jsf/core"
+	xmlns:p="http://primefaces.org/ui"
+	template="/WEB-INF/template.xhtml">
+
+	<ui:define name="content">
+		<h:form styleClass="container">
+			<div class="content p-d-flex p-jc-center p-ai-center layout-content">
+				<div class="ui-card p-p-6">
+					<p:growl id="message" />
+					<h1 class="p-mb-3">Esqueceu a Senha</h1>
+					<div class="p-field p-grid">
+						<div class="p-col-12 p-md-4">
+							<div class="ui-inputgroup">
+								<p:outputLabel value="Informe o Email:" />
+								<p:inputText value="#{esqueceuSenhaController.email}" />
+							</div>
+						</div>
+					</div>
+					<p:commandButton value="Enviar" icon="far fa-save"
+						actionListener="#{esqueceuSenhaController.enviar}"
+						process="@this @form" update="@form message" />
+				</div>
+			</div>
+		</h:form>
+	</ui:define>
+</ui:composition>

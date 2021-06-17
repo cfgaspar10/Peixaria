@@ -19,19 +19,11 @@
 			<p:panel id="panel">
 				<f:facet name="header">
 					<div align="center">
-						<h1>Gerenciamento de Venda</h1>
+						<h1>Área de Vendas</h1>
 					</div>
 				</f:facet>
 				<div class="ui-fluid p-formgrid p-grid">
 
-					<div class="p-field p-col-12 p-md-12">
-						<p:commandLink value="Visualizar vendas"
-							actionListener="#{saleController.openSaleListener}"
-							process="@this" update="@none">
-							<p:ajax event="dialogReturn"
-								listener="#{saleController.getSaleListener}" update="@form" />
-						</p:commandLink>
-					</div>
 
 					<div class="p-field p-col-12 p-md-12">
 						<p:commandLink value="Comprador: "

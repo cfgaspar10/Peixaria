@@ -22,7 +22,7 @@ public class Sale extends DefaultEntity<Sale> {
 	@Temporal(TemporalType.DATE)
 	private Date saleDate;
 	
-	@OneToOne @JoinColumn
+	@JoinColumn
 	private Cart cart;
 	
 	public Sale() {

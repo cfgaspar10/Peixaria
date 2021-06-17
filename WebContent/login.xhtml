@@ -34,7 +34,7 @@
 		<div class="layout-login">
 			<div class="login-content">
 				<div class="login-icon" >
-					<div class="image" title="Toro Loko"/>
+					<div class="image" title="Peixaria"/>
 				</div>
 				<div class="login-input">
 					<div>
@@ -46,10 +46,9 @@
 						<p:password value="#{loginController.password}" />
 					</div>
 					<div>
-						<p:commandLink update="@form"
-							action="#{loginController.forgotPassword}">
-							<h:outputText value="Esqueci a senha." />
-						</p:commandLink>
+						<p:link value="Esqueceu a Senha"
+						outcome="esqueceuSenha.xhtml?faces-redirect=true">
+					</p:link>
 					</div>
 				</div>
 
