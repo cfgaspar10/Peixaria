@@ -32,7 +32,7 @@ body.layout-scroll-block {
 	padding: 10px 20px;
 	width: 100%;
 	position: relative;
-	border-bottom: 5px solid #CB0B1E;
+	border-bottom: 5px solid rgb(255, 146, 0);
 	text-align: center;
 }
 

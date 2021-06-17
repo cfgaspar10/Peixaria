@@ -13,7 +13,7 @@ import application.Util;
 
 public class ImgProductServlet extends HttpServlet {
 
-	private static final long serialVersionUID = -3031813720759207659L;
+	
 
 	/*
      * @param request - recebe o parametro name (name da imagem do professor)
@@ -22,7 +22,10 @@ public class ImgProductServlet extends HttpServlet {
      * @throws IOException
      */
 	
-    @Override
+  
+	private static final long serialVersionUID = -4281712584010421280L;
+
+	@Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)  throws ServletException, IOException {
         // recebendo o name da imagem 
         String name = request.getParameter("name");
